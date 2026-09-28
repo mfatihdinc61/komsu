@@ -66,7 +66,7 @@ export function startTelegram(camera) {
   async function handle(message) {
     const chatId = message.chat.id;
     const text = message.text || '';
-    if (!text) return api('sendMessage', { chat_id: chatId, text: 'Please send a text question.' });
+    if (!text) return api('sendMessage', { chat_id: chatId, text: 'Şu an yalnızca yazılı soruları yanıtlayabiliyorum Abi. Sorunuzu metin olarak yazar mısınız?' });
     if (text.startsWith('/start') || text.startsWith('/help')) {
       return api('sendMessage', { chat_id: chatId, text: WELCOME });
     }

@@ -155,7 +155,11 @@ export function whatsappRouter(camera) {
           console.log(`[whatsapp] message from ${msg.from} (${msg.type})`);
 
           if (msg.type !== 'text') {
-            sendText(msg.from, 'Lütfen sorunuzu metin olarak gönderin.').catch(() => {});
+            // Stay silent on reactions and other non-message events (they aren't
+            // questions); only nudge when the user actually sent media expecting a reply.
+            if (['image', 'audio', 'voice', 'video', 'document', 'sticker'].includes(msg.type)) {
+              sendText(msg.from, 'Şu an yalnızca yazılı soruları yanıtlayabiliyorum Abi. Sorunuzu metin olarak yazar mısınız?').catch(() => {});
+            }
             continue;
           }
 
