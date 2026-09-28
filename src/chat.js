@@ -121,7 +121,7 @@ export async function chat(userKey, question, camera) {
 // (robust to any Turkish conditional phrasing like "…gelirse/…oynarsa/…girince").
 const WATCH_NOTIFY_RE = /(haber ver|haberdar|bildir|bilgilendir|uyar|haber et|haber yolla|haber gönder)/i;
 const WATCH_LIST_RE = /(uyarılar[ıi]m|aktif uyar|izlemeler|neleri izl|watch.*list|uyarı listesi|listem)/i;
-const WATCH_CANCEL_RE = /(iptal|kald[ıi]r|durdur|vazge[çc]|\bsil\b)/i;
+const WATCH_CANCEL_RE = /(iptal|kald[ıi]r|durdur|vazge[çc]|\bsil\b|istemiyorum|istemem|yeter\b|kapat|sustur|rahatsız|artık\s+\S*\s*(verme|gönderme|bildirme|yollama|etme)|(haber|bildirim|uyar[ıi])\w*\s*(verme|gönderme|isteme|yollama))/i;
 
 /** Regex-only check (no API) that a message is a watch create/list/cancel command. */
 export function isWatchCommand(q) {
@@ -133,14 +133,32 @@ export function isWatchCommand(q) {
   );
 }
 
-/** End-of-today by default; honour "N saat", "yarın" or "süresiz". */
-function computeExpiry(expiry, hours) {
+// Only make a watch permanent when the operator EXPLICITLY asked for it; a bare
+// "haber ver" defaults to end-of-today so nothing lingers past the day.
+// Accent-tolerant so "suresiz" (no ü) works too.
+const PERMANENT_RE = /(s[uü]resiz|iptal edene kadar|kald[ıi]rana kadar|durdurana kadar|ben durana|kal[ıi]c[ıi]|her zaman|daima)/i;
+
+/** Explicit "süresiz" wins; else N saat / yarın; else end-of-today. */
+function computeExpiry(expiry, hours, rawText = '') {
+  if (PERMANENT_RE.test(rawText)) return null;
   switch (expiry) {
-    case 'none': return null;
     case 'hours': return hours > 0 ? Date.now() + hours * 3600000 : endOfTodayMs();
     case 'tomorrow': return endOfTodayMs() + 86400000;
-    default: return endOfTodayMs(); // today / tonight / unspecified
+    default: return endOfTodayMs(); // today / tonight / none / unspecified → today
   }
+}
+
+/** The active watch whose condition best overlaps the message (by word stems), or null. */
+function bestWatchMatch(q, list) {
+  const qStems = new Set(words(q).map(stem));
+  if (!qStems.size) return null;
+  let best = null;
+  for (const w of list) {
+    let score = 0;
+    for (const cw of words(w.condition)) if (qStems.has(stem(cw))) score++;
+    if (score > 0 && (!best || score > best.score)) best = { ...w, score };
+  }
+  return best;
 }
 
 /**
@@ -158,21 +176,36 @@ async function handleWatchCommand(createdBy, channel, q) {
     return `Abi, aktif uyarıların:\n${lines.join('\n')}\n\nKaldırmak için "1. uyarıyı iptal et" ya da hepsi için "tüm uyarıları iptal et".`;
   }
 
-  // CANCEL
-  if (WATCH_CANCEL_RE.test(q) && (list.length || /uyar|izle|takip/i.test(q))) {
-    if (/hepsi|tüm[uü]?|tamam[ıi]|bütün/i.test(q)) {
-      const n = deactivateAll(createdBy);
-      return n ? `Abi, ${n} uyarının hepsini iptal ettim. 👍` : 'Abi, iptal edilecek aktif uyarı yok.';
-    }
+  // CANCEL / STOP
+  if (WATCH_CANCEL_RE.test(q) && (list.length || /uyar|izle|takip|bildirim|haber/i.test(q))) {
+    if (!list.length) return 'Abi, şu an aktif bir uyarın yok.';
+    const blanket = /(hepsi|hepsini|hepsinden|tüm|tümü|tümünü|bütün|hiç|hiçbir|tamamen)/i.test(q);
+
+    // Explicit position ("1. uyarıyı iptal et")
     const m = /(\d+)/.exec(q);
-    if (m && list.length) {
+    if (!blanket && m) {
       const target = list[Number(m[1]) - 1];
-      if (target) { deactivateWatch(target.id, createdBy); return `Abi, "${target.condition}" uyarısını iptal ettim. 👍`; }
+      if (target) { deactivateWatch(target.id, createdBy); return `Abi, "${target.condition}" uyarısını iptal ettim, artık haber vermem. 👍`; }
       return `Abi, ${m[1]} numaralı uyarı yok. "uyarılarım" yazarak listeyi görebilirsin.`;
     }
-    if (list.length === 1) { deactivateWatch(list[0].id, createdBy); return `Abi, "${list[0].condition}" uyarısını iptal ettim. 👍`; }
-    if (list.length > 1) return 'Abi, hangisini iptal edeyim? "uyarılarım" yazıp numarasını söyle ya da "tüm uyarıları iptal et".';
-    return 'Abi, iptal edilecek aktif uyarı yok.';
+
+    // Named condition ("artık minibüs haber verme")
+    if (!blanket) {
+      const match = bestWatchMatch(q, list);
+      if (match) { deactivateWatch(match.id, createdBy); return `Abi, "${match.condition}" uyarısını iptal ettim, artık haber vermem. 👍`; }
+    }
+
+    // Blanket ("hepsini durdur") or only one active → just stop it/them.
+    if (blanket || list.length === 1) {
+      const stopped = list.map((w) => w.condition);
+      const n = deactivateAll(createdBy);
+      return n === 1
+        ? `Abi, "${stopped[0]}" uyarısını iptal ettim, artık haber vermem. 👍`
+        : `Abi, ${n} uyarının hepsini iptal ettim, artık bildirim göndermeyeceğim. 👍`;
+    }
+
+    // Generic "stop" but several active and none named → confirm which.
+    return `Abi, ${list.length} aktif uyarın var. Hepsini durdurayım mı? "tüm uyarıları iptal et" de, ya da hangisini istemediğini söyle:\n${list.map((w, i) => `${i + 1}. ${w.condition}`).join('\n')}`;
   }
 
   // CREATE — notify verb present; parseWatch confirms and extracts the details.
@@ -187,7 +220,7 @@ async function handleWatchCommand(createdBy, channel, q) {
       return 'Şu an isteğini işleyemedim Abi, birazdan tekrar dener misin?';
     }
     if (!parsed?.isWatch || !parsed.condition) return null; // not really a watch → normal chat
-    const expiresAt = computeExpiry(parsed.expiry, parsed.hours);
+    const expiresAt = computeExpiry(parsed.expiry, parsed.hours, q);
     createWatch({
       createdBy,
       channel,
