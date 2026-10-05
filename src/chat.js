@@ -67,7 +67,7 @@ setInterval(() => {
  * Shared chat entry point for the web page, Telegram and WhatsApp.
  * userKey identifies the sender for rate limiting (e.g. "web:1.2.3.4", "tg:123").
  */
-export async function chat(userKey, question, camera) {
+export async function chat(userKey, question, camera, opts = {}) {
   const q = String(question || '').trim().slice(0, 500);
   if (!q) return 'Please type a question about the camera.';
   if (rateLimited(userKey)) return 'You have asked a lot of questions. Please try again in a few minutes.';
@@ -107,7 +107,7 @@ export async function chat(userKey, question, camera) {
       }
     }
 
-    const answer = await answerQuestion(q, events, { liveJpeg, recallFrames });
+    const answer = await answerQuestion(q, events, { liveJpeg, recallFrames, lang: opts.lang });
     return answer || 'Bunu tam yanıtlayamadım Abi, biraz daha açık sorabilir misin?';
   } catch (err) {
     if (err instanceof AiUnavailableError) return 'Şu an biraz yoğunum Abi, bir dakika sonra tekrar sorar mısın? 🙏';

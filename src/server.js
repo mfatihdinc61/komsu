@@ -69,7 +69,7 @@ app.get('/api/events', (req, res) => {
 });
 
 app.post('/api/chat', async (req, res) => {
-  const answer = await chat(`web:${req.ip}`, req.body?.message, camera);
+  const answer = await chat(`web:${req.ip}`, req.body?.message, camera, { lang: req.body?.lang });
   res.json({ answer });
 });
 

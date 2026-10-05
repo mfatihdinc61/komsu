@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Komşu — aymam.ai</title>
-  <meta name="description" content="Komşu: sıradan bir kamerayı, mahalleye göz kulak olan yapay zekâ komşunuza dönüştürür." />
+  <meta name="description" id="metaDesc" content="Komşu: sıradan bir kamerayı, mahalleye göz kulak olan yapay zekâ komşunuza dönüştürür." />
   <link rel="icon" href="logo.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="aurora" aria-hidden="true"></div>
+
   <header>
     <a class="brand" href="/">
       <img class="logo" src="logo.webp" alt="Komşu" />
@@ -20,40 +22,46 @@
         <span class="tagline"><span class="dot" id="statusDot"></span> by aymam.ai</span>
       </span>
     </a>
-    <div class="channels">
-      <a id="waLink" class="chip wa" hidden target="_blank" rel="noopener" title="WhatsApp'tan sor">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.8 12.2l-.3.5.7 2.4-2.5-.7-.5.3A8 8 0 1 1 12 4zm-3.4 4c-.2 0-.5 0-.7.4-.3.4-.9 1-.9 2.3s1 2.6 1.1 2.8c.1.2 1.9 3 4.7 4 2.3.9 2.8.7 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.1-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.8-.1-.3 0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4z"/></svg>
-        WhatsApp
-      </a>
-      <a id="tgLink" class="chip tg" hidden target="_blank" rel="noopener" title="Telegram'dan sor">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 13.2 1.7 11.7c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg>
-        Telegram
-      </a>
+    <div class="header-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="tr">TR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <div class="channels">
+        <a id="waLink" class="chip wa" hidden target="_blank" rel="noopener" data-i18n-title="waTitle" title="WhatsApp'tan sor">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.8 12.2l-.3.5.7 2.4-2.5-.7-.5.3A8 8 0 1 1 12 4zm-3.4 4c-.2 0-.5 0-.7.4-.3.4-.9 1-.9 2.3s1 2.6 1.1 2.8c.1.2 1.9 3 4.7 4 2.3.9 2.8.7 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.1-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.8-.1-.3 0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4z"/></svg>
+          WhatsApp
+        </a>
+        <a id="tgLink" class="chip tg" hidden target="_blank" rel="noopener" data-i18n-title="tgTitle" title="Telegram'dan sor">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 13.2 1.7 11.7c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg>
+          Telegram
+        </a>
+      </div>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-art">
-      <img class="hero-logo" src="logo.webp" alt="Komşu — yapay zekâ komşunuz" />
+      <img class="hero-logo" src="logo.webp" alt="Komşu" />
     </div>
     <div class="hero-copy">
-      <h1>Mahallenize göz kulak olan <span class="accent">yapay zekâ komşu</span></h1>
-      <p>Komşu, sıradan bir kamerayı akıllı bir asistana dönüştürür — hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda size haber verir.</p>
+      <h1 data-i18n-html="heroH1">Mahallenize göz kulak olan <span class="accent">yapay zekâ komşu</span></h1>
+      <p data-i18n="heroP">Komşu, sıradan bir kamerayı akıllı bir asistana dönüştürür — hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda size haber verir.</p>
     </div>
   </section>
 
   <nav class="tabs">
-    <button class="tab active" data-tab="live">📹 <span class="t-long">Canlı </span>Görüntü</button>
-    <button class="tab" data-tab="ai">🤖 <span class="t-long">Yapay Zekâ </span>Sohbet</button>
-    <button class="tab" data-tab="log">📝 <span class="t-long">Son </span>Açıklamalar</button>
+    <button class="tab active" data-tab="live" data-i18n-html="tabLive">📹 <span class="t-long">Canlı </span>Görüntü</button>
+    <button class="tab" data-tab="ai" data-i18n-html="tabAI">🤖 <span class="t-long">Yapay Zekâ </span>Sohbet</button>
+    <button class="tab" data-tab="log" data-i18n-html="tabLog">📝 <span class="t-long">Son </span>Açıklamalar</button>
   </nav>
 
   <main>
     <section id="tab-live" class="panel active">
       <div class="video-wrap">
         <img id="stream" alt="Canlı kamera görüntüsü" />
-        <div id="videoOverlay" class="overlay">Kameraya bağlanılıyor…</div>
-        <span id="liveBadge" class="live-badge" hidden>● CANLI</span>
+        <div id="videoOverlay" class="overlay" data-i18n="overlayConnecting">Kameraya bağlanılıyor…</div>
+        <span id="liveBadge" class="live-badge" hidden data-i18n="liveBadge">● CANLI</span>
       </div>
       <p class="caption" id="cameraLabel"></p>
     </section>
@@ -61,33 +69,33 @@
     <section id="tab-ai" class="panel">
       <div class="chat">
         <div id="messages" class="messages">
-          <div class="msg bot">Merhaba komşu! 👋 Kameranın ne gördüğünü bana sorabilirsiniz. Örneğin: “Son bir saatte ne oldu?” ya da “Şu an ortam kalabalık mı?” Şu anki durumu sormak için “şu an” veya “şimdi” diye sorun; canlı görüntüye bakarım.</div>
+          <div class="msg bot" data-i18n-html="chatGreeting">Merhaba komşu! 👋 Kameranın ne gördüğünü bana sorabilirsiniz. Örneğin: “Son bir saatte ne oldu?” ya da “Şu an ortam kalabalık mı?” Şu anki durumu sormak için “şu an” veya “şimdi” diye sorun; canlı görüntüye bakarım.</div>
         </div>
         <form id="chatForm" class="chat-form">
-          <input id="chatInput" type="text" autocomplete="off" placeholder="Sahne hakkında soru sorun…" maxlength="500" />
-          <button type="submit" id="sendBtn">Gönder</button>
+          <input id="chatInput" type="text" autocomplete="off" data-i18n-ph="chatPlaceholder" placeholder="Sahne hakkında soru sorun…" maxlength="500" />
+          <button type="submit" id="sendBtn" data-i18n="sendBtn">Gönder</button>
         </form>
       </div>
     </section>
 
     <section id="tab-log" class="panel">
       <div class="log-head">
-        <h2>Komşu neler fark etti?</h2>
-        <p class="muted">Ortamda bir hareket olduğunda yapay zekâ sahneyi anlatır ve saatiyle buraya ekler.</p>
+        <h2 data-i18n="logH2">Komşu neler fark etti?</h2>
+        <p class="muted" data-i18n="logP">Ortamda bir hareket olduğunda yapay zekâ sahneyi anlatır ve saatiyle buraya ekler.</p>
       </div>
-      <ol id="events" class="events"><li class="muted">Yükleniyor…</li></ol>
+      <ol id="events" class="events"><li class="muted" data-i18n="eventsLoading">Yükleniyor…</li></ol>
     </section>
   </main>
 
   <section class="cta">
     <div class="cta-inner">
-      <h2>Kameranız da <span class="accent">Komşu</span> kadar akıllı olsun ister misiniz?</h2>
-      <p>Komşu sıradan bir güvenlik kamerasıyla çalışır: hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda size haber verir — web sitesinde, WhatsApp'ta ve Telegram'da. Tıpkı sizin için göz kulak olan bir komşu gibi.</p>
-      <a id="ctaLink" class="cta-btn" hidden>Kameranıza Komşu'yu ekleyin</a>
+      <h2 data-i18n-html="ctaH2">Kameranız da <span class="accent">Komşu</span> kadar akıllı olsun ister misiniz?</h2>
+      <p data-i18n="ctaP">Komşu sıradan bir güvenlik kamerasıyla çalışır: hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda size haber verir — web sitesinde, WhatsApp'ta ve Telegram'da. Tıpkı sizin için göz kulak olan bir komşu gibi.</p>
+      <a id="ctaLink" class="cta-btn" hidden data-i18n="ctaBtn">Kameranıza Komşu'yu ekleyin</a>
     </div>
   </section>
 
-  <footer class="muted">
+  <footer class="muted" data-i18n-html="footer">
     <strong>Komşu</strong> · bir <a href="https://aymam.ai" target="_blank" rel="noopener">aymam.ai</a> ürünü<br />
     Yalnızca demo amaçlıdır. Kamera görüntüsü sahibinin izniyle kullanılmaktadır. Asistan kişileri tanımlamaktan kaçınır ve plaka okumaz.
   </footer>

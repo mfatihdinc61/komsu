@@ -326,8 +326,54 @@ footer { max-width: 1040px; margin: 0 auto; padding: 24px 22px 46px; font-size: 
 footer strong { color: var(--accent); }
 .muted { color: var(--muted); }
 
+/* ---------- Header right: language toggle + channels ---------- */
+.header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface);
+  flex: 0 0 auto;
+}
+.lang-toggle button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: color .15s ease, background .15s ease;
+}
+.lang-toggle button.active { background: linear-gradient(180deg, var(--accent), var(--accent-2)); color: var(--ink); }
+.lang-toggle button:not(.active):hover { color: var(--text); }
+
+/* ---------- Ambient background (subtle, living hero) ---------- */
+.aurora {
+  position: fixed;
+  inset: -20vmax;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(42vmax 42vmax at 78% 6%, rgba(243, 193, 74, .16), transparent 60%),
+    radial-gradient(38vmax 38vmax at 8% 0%, rgba(224, 130, 60, .12), transparent 58%),
+    radial-gradient(46vmax 46vmax at 52% 110%, rgba(120, 95, 215, .10), transparent 60%);
+  filter: blur(10px);
+  animation: auroraDrift 28s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: .9; }
+  50%  { transform: translate3d(2.5vmax, 1.5vmax, 0) scale(1.06); opacity: 1; }
+  100% { transform: translate3d(-2vmax, -1vmax, 0) scale(1.03); opacity: .92; }
+}
+@media (prefers-reduced-motion: reduce) { .aurora { animation: none; } }
+
 @media (max-width: 560px) {
   header { justify-content: center; }
+  .header-right { justify-content: center; width: 100%; }
   .brand .logo { width: 46px; height: 46px; }
   .wordmark { font-size: 23px; }
   .tabs { gap: 4px; width: calc(100% - 32px); }
