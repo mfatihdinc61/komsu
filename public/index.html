@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Komşu — aymam.ai</title>
-  <meta name="description" id="metaDesc" content="Komşu: sıradan bir kamerayı, mahalleye göz kulak olan yapay zekâ komşunuza dönüştürür." />
-  <link rel="icon" href="logo.webp" />
+  <title>Argus — aymam.ai</title>
+  <meta name="description" id="metaDesc" content="Argus turns ordinary security cameras into an AI agent that watches, logs, answers questions and proactively alerts you." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M4 32C14 16 50 16 60 32 50 48 14 48 4 32Z' fill='none' stroke='%23f3c14a' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='11' fill='none' stroke='%23f3c14a' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%23f3c14a'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" />
@@ -19,11 +19,25 @@
     <div class="shade"></div>
   </div>
 
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="argus-mark" viewBox="0 0 64 64">
+      <defs>
+        <linearGradient id="argusGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f6cf63" />
+          <stop offset="1" stop-color="#e0a92e" />
+        </linearGradient>
+      </defs>
+      <path d="M3 32C13.5 15 50.5 15 61 32 50.5 49 13.5 49 3 32Z" fill="rgba(243,193,74,.06)" stroke="url(#argusGrad)" stroke-width="3.2" stroke-linejoin="round" />
+      <circle cx="32" cy="32" r="11.5" fill="none" stroke="url(#argusGrad)" stroke-width="3.2" />
+      <circle cx="32" cy="32" r="4.6" fill="url(#argusGrad)" />
+    </symbol>
+  </svg>
+
   <header>
     <a class="brand" href="/">
-      <img class="logo" src="logo.webp" alt="Komşu" />
+      <svg class="logo"><use href="#argus-mark" /></svg>
       <span class="brand-text">
-        <span class="wordmark">Komşu</span>
+        <span class="wordmark">Argus</span>
         <span class="tagline"><span class="dot" id="statusDot"></span> by aymam.ai</span>
       </span>
     </a>
@@ -33,11 +47,11 @@
         <button type="button" data-lang="en">EN</button>
       </div>
       <div class="channels">
-        <a id="waLink" class="chip wa" hidden target="_blank" rel="noopener" data-i18n-title="waTitle" title="WhatsApp'tan sor">
+        <a id="waLink" class="chip wa" hidden target="_blank" rel="noopener" data-i18n-title="waTitle" title="Ask on WhatsApp">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.8 12.2l-.3.5.7 2.4-2.5-.7-.5.3A8 8 0 1 1 12 4zm-3.4 4c-.2 0-.5 0-.7.4-.3.4-.9 1-.9 2.3s1 2.6 1.1 2.8c.1.2 1.9 3 4.7 4 2.3.9 2.8.7 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.1-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.8-.1-.3 0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4z"/></svg>
           WhatsApp
         </a>
-        <a id="tgLink" class="chip tg" hidden target="_blank" rel="noopener" data-i18n-title="tgTitle" title="Telegram'dan sor">
+        <a id="tgLink" class="chip tg" hidden target="_blank" rel="noopener" data-i18n-title="tgTitle" title="Ask on Telegram">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 13.2 1.7 11.7c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg>
           Telegram
         </a>
@@ -47,11 +61,11 @@
 
   <section class="hero">
     <div class="hero-art">
-      <img class="hero-logo" src="logo.webp" alt="Komşu" />
+      <svg class="hero-mark"><use href="#argus-mark" /></svg>
     </div>
     <div class="hero-copy">
-      <h1 data-i18n-html="heroH1">Mahallenize göz kulak olan <span class="accent">yapay zekâ komşu</span></h1>
-      <p data-i18n="heroP">Komşu, sıradan bir kamerayı akıllı bir asistana dönüştürür — hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda size haber verir.</p>
+      <h1 data-i18n-html="heroH1">Kameralarınıza 7/24 göz kulak olan <span class="accent">yapay zekâ</span></h1>
+      <p data-i18n="heroP">Argus, sıradan bir güvenlik kamerasını akıllı bir asistana dönüştürür — hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda sizi uyarır.</p>
     </div>
   </section>
 
@@ -74,7 +88,7 @@
     <section id="tab-ai" class="panel">
       <div class="chat">
         <div id="messages" class="messages">
-          <div class="msg bot" data-i18n-html="chatGreeting">Merhaba komşu! 👋 Kameranın ne gördüğünü bana sorabilirsiniz. Örneğin: “Son bir saatte ne oldu?” ya da “Şu an ortam kalabalık mı?” Şu anki durumu sormak için “şu an” veya “şimdi” diye sorun; canlı görüntüye bakarım.</div>
+          <div class="msg bot" data-i18n-html="chatGreeting">Merhaba! 👋 Kameranın ne gördüğünü bana sorabilirsiniz. Örneğin: “Son bir saatte ne oldu?” ya da “Şu an ortam kalabalık mı?” Şu anki durumu sormak için “şu an” veya “şimdi” diye sorun; canlı görüntüye bakarım.</div>
         </div>
         <form id="chatForm" class="chat-form">
           <input id="chatInput" type="text" autocomplete="off" data-i18n-ph="chatPlaceholder" placeholder="Sahne hakkında soru sorun…" maxlength="500" />
@@ -85,7 +99,7 @@
 
     <section id="tab-log" class="panel">
       <div class="log-head">
-        <h2 data-i18n="logH2">Komşu neler fark etti?</h2>
+        <h2 data-i18n="logH2">Argus neler fark etti?</h2>
         <p class="muted" data-i18n="logP">Ortamda bir hareket olduğunda yapay zekâ sahneyi anlatır ve saatiyle buraya ekler.</p>
       </div>
       <ol id="events" class="events"><li class="muted" data-i18n="eventsLoading">Yükleniyor…</li></ol>
@@ -94,14 +108,14 @@
 
   <section class="cta">
     <div class="cta-inner">
-      <h2 data-i18n-html="ctaH2">Kameranız da <span class="accent">Komşu</span> kadar akıllı olsun ister misiniz?</h2>
-      <p data-i18n="ctaP">Komşu sıradan bir güvenlik kamerasıyla çalışır: hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda size haber verir — web sitesinde, WhatsApp'ta ve Telegram'da. Tıpkı sizin için göz kulak olan bir komşu gibi.</p>
-      <a id="ctaLink" class="cta-btn" hidden data-i18n="ctaBtn">Kameranıza Komşu'yu ekleyin</a>
+      <h2 data-i18n-html="ctaH2">Kameralarınız da <span class="accent">bu kadar akıllı</span> olsun ister misiniz?</h2>
+      <p data-i18n="ctaP">Argus mevcut güvenlik kameralarınızla çalışır: hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda sizi uyarır — web sitesinde, WhatsApp'ta ve Telegram'da. Böylece ekibinizin ekran başında beklemesine gerek kalmaz.</p>
+      <a id="ctaLink" class="cta-btn" hidden data-i18n="ctaBtn">Kameralarınıza Argus'u ekleyin</a>
     </div>
   </section>
 
   <footer class="muted" data-i18n-html="footer">
-    <strong>Komşu</strong> · bir <a href="https://aymam.ai" target="_blank" rel="noopener">aymam.ai</a> ürünü<br />
+    <strong>Argus</strong> · bir <a href="https://aymam.ai" target="_blank" rel="noopener">aymam.ai</a> ürünü<br />
     Yalnızca demo amaçlıdır. Kamera görüntüsü sahibinin izniyle kullanılmaktadır. Asistan kişileri tanımlamaktan kaçınır ve plaka okumaz.
   </footer>
 
