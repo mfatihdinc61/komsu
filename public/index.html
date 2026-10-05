@@ -12,7 +12,12 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="aurora" aria-hidden="true"></div>
+  <div class="bg" aria-hidden="true">
+    <video id="bgv" autoplay muted loop playsinline preload="auto" poster="hero-bg.jpg">
+      <source src="hero-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="shade"></div>
+  </div>
 
   <header>
     <a class="brand" href="/">
