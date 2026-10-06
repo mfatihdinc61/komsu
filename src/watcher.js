@@ -37,7 +37,7 @@ export function startWatcher(camera, onEvent) {
     try {
       const [previous] = recentEvents(1);
       const watches = activeWatches();
-      const { text, alerts, watchMatches } = await describeScene(jpeg, previous, watches);
+      const { text, textTr, alerts, watchMatches } = await describeScene(jpeg, previous, watches);
 
       // Fire alerts even when the description itself is unchanged — a dangerous
       // situation must not be swallowed by dedupe. Cooldown lives in the dispatcher.
@@ -51,7 +51,8 @@ export function startWatcher(camera, onEvent) {
         console.log(`[watcher] ${kind}: no meaningful change`);
         return;
       }
-      const event = addEvent({ ts: Date.now(), kind, motion: area, description: text });
+      const descriptionTr = textTr && !textTr.includes(NO_CHANGE) ? textTr : null;
+      const event = addEvent({ ts: Date.now(), kind, motion: area, description: text, descriptionTr });
       saveFrames(event.id, camera.recentFrames(config.ai.framesPerEvent)); // a few frames for re-analysis
       lastDescribedGrid = grid;
       console.log(`[watcher] ${kind}: ${text}`);

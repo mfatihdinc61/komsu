@@ -342,9 +342,16 @@ footer strong { color: var(--accent); }
   backdrop-filter: blur(6px);
 }
 .ch-ico {
-  width: 38px; height: 38px; display: grid; place-items: center;
-  border-radius: 11px; font-size: 19px; margin-bottom: 10px;
-  background: rgba(34, 211, 238, .10); border: 1px solid rgba(34, 211, 238, .28);
+  width: 40px; height: 40px; display: grid; place-items: center;
+  border-radius: 12px; margin-bottom: 11px;
+  background: linear-gradient(145deg, rgba(34, 211, 238, .20), rgba(10, 125, 148, .07));
+  border: 1px solid rgba(34, 211, 238, .32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 0 18px -6px rgba(34, 211, 238, .55);
+}
+.ch-ico svg {
+  width: 21px; height: 21px;
+  fill: none; stroke: var(--accent); stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
 }
 .ch-card h3 { margin: 0 0 5px; font-size: 15.5px; font-weight: 700; }
 .ch-card p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
@@ -440,7 +447,7 @@ footer strong { color: var(--accent); }
   .channels-sec { padding: 0 16px; }
   .ch-cards { grid-template-columns: 1fr; gap: 9px; }
   /* Compact rows on phones: icon left, text right, so the live feed stays close. */
-  .ch-card { display: grid; grid-template-columns: 38px 1fr; column-gap: 12px; padding: 12px 14px; }
+  .ch-card { display: grid; grid-template-columns: 40px 1fr; column-gap: 12px; padding: 12px 14px; }
   .ch-ico { grid-row: span 3; margin-bottom: 0; }
   .ch-note { justify-self: start; margin-top: 7px; }
   .ch-actions { flex-wrap: nowrap; }

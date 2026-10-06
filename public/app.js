@@ -210,7 +210,7 @@ function renderEvents(events) {
     if (!firstLoad && !knownIds.has(e.id)) li.classList.add('new');
     const ts = new Date(e.ts).toLocaleString(t('locale'), { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
     li.innerHTML = `<time>${ts}</time><span></span>`;
-    li.querySelector('span').textContent = e.description;
+    li.querySelector('span').textContent = lang === 'tr' && e.description_tr ? e.description_tr : e.description;
     ol.appendChild(li);
     knownIds.add(e.id);
   }

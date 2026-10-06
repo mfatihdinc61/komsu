@@ -144,6 +144,7 @@ export async function describeScene(jpegBuf, previous, watches = []) {
   const types = config.ai && config.alerts ? config.alerts.types : [];
   const system = `You watch a fixed CCTV camera (${config.camera.label}) and write short activity log entries, and you also flag emergencies.
 For "description": write in ${config.ai.language}, one or two plain sentences, no preamble, about the activity (people, vehicles, animals, doors, deliveries, crowding, anything unusual). If nothing meaningful changed compared to the previous entry, set description to exactly ${NO_CHANGE}.
+For "description_tr": the same description written naturally in Turkish (same facts, not a word-for-word translation). If description is ${NO_CHANGE}, set description_tr to ${NO_CHANGE} too.
 For "alerts": list any of these dangerous situations you actually see in the frame right now: ${types.join(', ')}.
 - "smoking" = a person smoking a cigarette/vape (visible cigarette, smoke by the mouth/hand).
 - "fire" = flames or heavy smoke. "fall" = a person collapsed/on the ground. "fight" = physical violence.
@@ -159,6 +160,7 @@ ${PRIVACY_RULES}`;
     type: 'object',
     properties: {
       description: { type: 'string' },
+      description_tr: { type: 'string' },
       alerts: {
         type: 'array',
         items: {
@@ -194,7 +196,7 @@ ${PRIVACY_RULES}`;
   const raw = await generate(
     [imagePart(jpegBuf), { text: `${prevText}\nReport for now (${formatTime(Date.now())}).` }],
     system + watchBlock,
-    250,
+    450,
     { responseMimeType: 'application/json', responseSchema: schema },
   );
 
@@ -211,10 +213,10 @@ ${PRIVACY_RULES}`;
     const watchMatches = Array.isArray(parsed.watchMatches)
       ? parsed.watchMatches.filter((w) => w && typeof w.id === 'number')
       : [];
-    return { text: (parsed.description || '').trim(), alerts, watchMatches };
+    return { text: (parsed.description || '').trim(), textTr: (parsed.description_tr || '').trim(), alerts, watchMatches };
   } catch {
     // If the model didn't return valid JSON at all, treat the raw text as the description.
-    return { text: raw.trim(), alerts: [], watchMatches: [] };
+    return { text: raw.trim(), textTr: '', alerts: [], watchMatches: [] };
   }
 }
 

@@ -15,13 +15,16 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS events_ts ON events (ts);
 `);
 
-const insertStmt = db.prepare('INSERT INTO events (ts, kind, motion, description) VALUES (?, ?, ?, ?)');
+// Turkish copy of each description, so the page can show the log in its own language.
+try { db.exec('ALTER TABLE events ADD COLUMN description_tr TEXT'); } catch { /* column already exists */ }
+
+const insertStmt = db.prepare('INSERT INTO events (ts, kind, motion, description, description_tr) VALUES (?, ?, ?, ?, ?)');
 const recentStmt = db.prepare('SELECT * FROM events ORDER BY ts DESC LIMIT ?');
 const betweenStmt = db.prepare('SELECT * FROM events WHERE ts >= ? AND ts <= ? ORDER BY ts DESC LIMIT ?');
 
-export function addEvent({ ts, kind, motion, description }) {
-  const { lastInsertRowid } = insertStmt.run(ts, kind, motion, description);
-  return { id: Number(lastInsertRowid), ts, kind, motion, description };
+export function addEvent({ ts, kind, motion, description, descriptionTr = null }) {
+  const { lastInsertRowid } = insertStmt.run(ts, kind, motion, description, descriptionTr || null);
+  return { id: Number(lastInsertRowid), ts, kind, motion, description, description_tr: descriptionTr || null };
 }
 
 /** Newest first. */
