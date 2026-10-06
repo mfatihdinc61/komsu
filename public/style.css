@@ -367,19 +367,24 @@ footer strong { color: var(--accent); }
     linear-gradient(180deg, rgba(5, 9, 17, .86) 0%, rgba(5, 9, 17, .93) 45%, rgba(5, 9, 17, .98) 100%);
 }
 
-/* ---------- Argus eye mark (header + hero), overrides the old image logo ---------- */
+/* ---------- Logo emblem (header + hero) ---------- */
 .brand .logo {
-  width: 40px; height: 40px;
-  border: none; border-radius: 0; background: transparent;
-  box-shadow: none;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .55));
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(34, 211, 238, .45);
+  background: var(--bg);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, .08), 0 6px 16px -6px rgba(0, 0, 0, .7);
 }
-.hero-mark {
+.hero-logo {
   position: relative;
   z-index: 1;
-  width: clamp(150px, 22vw, 230px);
-  height: clamp(150px, 22vw, 230px);
-  filter: drop-shadow(0 12px 34px rgba(34, 211, 238, .28));
+  width: clamp(160px, 24vw, 240px);
+  height: clamp(160px, 24vw, 240px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(34, 211, 238, .4);
+  box-shadow: 0 0 0 6px rgba(34, 211, 238, .07), 0 24px 55px -20px rgba(0, 0, 0, .85);
 }
 
 @media (max-width: 560px) {
