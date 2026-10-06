@@ -28,6 +28,7 @@ const I18N = {
     tgTitle: "Telegram'dan sor",
     chatError: 'Bağlantı hatası. Lütfen tekrar deneyin.',
     noAnswer: 'Yanıt alınamadı.',
+    cameraCaption: 'Canlı kamera',
     locale: 'tr-TR',
   },
   en: {
@@ -56,6 +57,7 @@ const I18N = {
     tgTitle: 'Ask on Telegram',
     chatError: 'Connection error. Please try again.',
     noAnswer: 'No answer.',
+    cameraCaption: 'Live camera',
     locale: 'en-GB',
   },
 };
@@ -96,7 +98,6 @@ document.querySelectorAll('.tab').forEach((btn) => {
 
 // --- Config: channel links + labels ---
 fetch('/api/config').then((r) => r.json()).then((cfg) => {
-  $('cameraLabel').textContent = cfg.cameraLabel || '';
   if (cfg.whatsappUrl) { $('waLink').href = cfg.whatsappUrl; $('waLink').hidden = false; }
   if (cfg.telegramUrl) { $('tgLink').href = cfg.telegramUrl; $('tgLink').hidden = false; }
   if (cfg.contactUrl) { $('ctaLink').href = cfg.contactUrl; $('ctaLink').hidden = false; }
