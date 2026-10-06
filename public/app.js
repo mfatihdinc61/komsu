@@ -29,6 +29,19 @@ const I18N = {
     chatError: 'Bağlantı hatası. Lütfen tekrar deneyin.',
     noAnswer: 'Yanıt alınamadı.',
     cameraCaption: 'Canlı kamera',
+    chH2: "Kameranızla <span class=\"accent\">WhatsApp ve Telegram'dan</span> konuşun",
+    chP: 'Uygulama yok, panel yok — kameranıza bir arkadaşınıza yazar gibi yazın.',
+    c1T: 'Her şeyi sorun',
+    c1P: '“Şu an ne oluyor?”, “Son bir saatte kimler geldi?” — anında yanıt alın.',
+    c2T: 'Görüntüyü isteyin',
+    c2P: '“Göster” yazın, kameranın o anki ya da istediğiniz saatteki karesi gelsin.',
+    c3T: 'Alarm kurun',
+    c3P: 'Yangın, düşme, sigara gibi durumlarda otomatik uyarı; ya da “Bugün minibüs gelirse haber ver” gibi kendi alarmınızı yazın.',
+    c3N: 'Kurulumunuzda yetkili numaralara açıktır',
+    waBtn: "WhatsApp'tan sor",
+    tgBtn: "Telegram'dan sor",
+    tryLabel: 'Hemen deneyin:',
+    prompts: ['Şu an ne oluyor?', 'Son bir saatte ne oldu?', 'Şu anki görüntüyü göster'],
     locale: 'tr-TR',
   },
   en: {
@@ -58,6 +71,19 @@ const I18N = {
     chatError: 'Connection error. Please try again.',
     noAnswer: 'No answer.',
     cameraCaption: 'Live camera',
+    chH2: 'Talk to your cameras on <span class="accent">WhatsApp & Telegram</span>',
+    chP: 'No app, no dashboard — message your camera like you’d message a colleague.',
+    c1T: 'Ask anything',
+    c1P: '“What’s happening right now?”, “Who came in the last hour?” — get an instant answer.',
+    c2T: 'Get the picture',
+    c2P: 'Type “show me” and receive the current frame — or one from any time you ask about.',
+    c3T: 'Set alerts',
+    c3P: 'Automatic alerts for fire, falls, smoking and more — or write your own, like “Tell me if a minibus arrives today”.',
+    c3N: 'Available to authorized numbers in your installation',
+    waBtn: 'Ask on WhatsApp',
+    tgBtn: 'Ask on Telegram',
+    tryLabel: 'Try it now:',
+    prompts: ['What is happening right now?', 'What happened in the last hour?', 'Show me the camera right now'],
     locale: 'en-GB',
   },
 };
@@ -80,6 +106,27 @@ function applyLang(l) {
   document.querySelectorAll('[data-i18n-ph]').forEach((el) => { const v = d[el.getAttribute('data-i18n-ph')]; if (v != null) el.placeholder = v; });
   document.querySelectorAll('[data-i18n-title]').forEach((el) => { const v = d[el.getAttribute('data-i18n-title')]; if (v != null) el.title = v; });
   document.querySelectorAll('.lang-toggle button').forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
+  renderPrompts();
+}
+
+// Example prompts that open WhatsApp with the question pre-typed (localized).
+let waBase = '';
+function renderPrompts() {
+  const box = $('promptChips');
+  if (!box || !waBase) return;
+  const prompts = t('prompts');
+  $('waLink').href = `${waBase}?text=${encodeURIComponent(prompts[0])}`;
+  box.innerHTML = '';
+  for (const p of prompts) {
+    const a = document.createElement('a');
+    a.className = 'prompt-chip';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.href = `${waBase}?text=${encodeURIComponent(p)}`;
+    a.textContent = p;
+    box.appendChild(a);
+  }
+  $('chPrompts').hidden = false;
 }
 
 document.querySelectorAll('.lang-toggle button').forEach((b) =>
@@ -98,7 +145,12 @@ document.querySelectorAll('.tab').forEach((btn) => {
 
 // --- Config: channel links + labels ---
 fetch('/api/config').then((r) => r.json()).then((cfg) => {
-  if (cfg.whatsappUrl) { $('waLink').href = cfg.whatsappUrl; $('waLink').hidden = false; }
+  if (cfg.whatsappUrl) {
+    $('waLink').href = cfg.whatsappUrl;
+    $('waLink').hidden = false;
+    waBase = cfg.whatsappUrl.split('?')[0];
+    renderPrompts();
+  }
   if (cfg.telegramUrl) { $('tgLink').href = cfg.telegramUrl; $('tgLink').hidden = false; }
   if (cfg.contactUrl) { $('ctaLink').href = cfg.contactUrl; $('ctaLink').hidden = false; }
 }).catch(() => {});

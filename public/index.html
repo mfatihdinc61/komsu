@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
   <div class="bg" aria-hidden="true">
@@ -32,16 +32,6 @@
         <button type="button" data-lang="tr">TR</button>
         <button type="button" data-lang="en">EN</button>
       </div>
-      <div class="channels">
-        <a id="waLink" class="chip wa" hidden target="_blank" rel="noopener" data-i18n-title="waTitle" title="Ask on WhatsApp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.8 12.2l-.3.5.7 2.4-2.5-.7-.5.3A8 8 0 1 1 12 4zm-3.4 4c-.2 0-.5 0-.7.4-.3.4-.9 1-.9 2.3s1 2.6 1.1 2.8c.1.2 1.9 3 4.7 4 2.3.9 2.8.7 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.1-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.8-.1-.3 0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4z"/></svg>
-          WhatsApp
-        </a>
-        <a id="tgLink" class="chip tg" hidden target="_blank" rel="noopener" data-i18n-title="tgTitle" title="Ask on Telegram">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 13.2 1.7 11.7c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg>
-          Telegram
-        </a>
-      </div>
     </div>
   </header>
 
@@ -52,6 +42,45 @@
     <div class="hero-copy">
       <h1 data-i18n-html="heroH1">Kameralarınıza 7/24 göz kulak olan <span class="accent">yapay zekâ</span></h1>
       <p data-i18n="heroP">Komşu, sıradan bir güvenlik kamerasını akıllı bir asistana dönüştürür — hareketi izler, gördüklerini not eder, sorularınızı yanıtlar ve belirlediğiniz durumlarda sizi uyarır.</p>
+    </div>
+  </section>
+
+  <section class="channels-sec">
+    <div class="channels-head">
+      <h2 data-i18n-html="chH2">Kameranızla <span class="accent">WhatsApp ve Telegram'dan</span> konuşun</h2>
+      <p class="muted" data-i18n="chP">Uygulama yok, panel yok — kameranıza bir arkadaşınıza yazar gibi yazın.</p>
+    </div>
+    <div class="ch-cards">
+      <div class="ch-card">
+        <div class="ch-ico">💬</div>
+        <h3 data-i18n="c1T">Her şeyi sorun</h3>
+        <p data-i18n="c1P">“Şu an ne oluyor?”, “Son bir saatte kimler geldi?” — anında yanıt alın.</p>
+      </div>
+      <div class="ch-card">
+        <div class="ch-ico">📷</div>
+        <h3 data-i18n="c2T">Görüntüyü isteyin</h3>
+        <p data-i18n="c2P">“Göster” yazın, kameranın o anki ya da istediğiniz saatteki karesi gelsin.</p>
+      </div>
+      <div class="ch-card">
+        <div class="ch-ico">🔔</div>
+        <h3 data-i18n="c3T">Alarm kurun</h3>
+        <p data-i18n="c3P">Yangın, düşme, sigara gibi durumlarda otomatik uyarı; ya da “Bugün minibüs gelirse haber ver” gibi kendi alarmınızı yazın.</p>
+        <span class="ch-note" data-i18n="c3N">Kurulumunuzda yetkili numaralara açıktır</span>
+      </div>
+    </div>
+    <div class="ch-actions">
+      <a id="waLink" class="ch-btn wa" hidden target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.8 12.2l-.3.5.7 2.4-2.5-.7-.5.3A8 8 0 1 1 12 4zm-3.4 4c-.2 0-.5 0-.7.4-.3.4-.9 1-.9 2.3s1 2.6 1.1 2.8c.1.2 1.9 3 4.7 4 2.3.9 2.8.7 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.1-1.3-.1-.1-.3-.2-.6-.3l-1.6-.8c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.8-.1-.3 0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4z"/></svg>
+        <span data-i18n="waBtn">WhatsApp'tan sor</span>
+      </a>
+      <a id="tgLink" class="ch-btn tg" hidden target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 13.2 1.7 11.7c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg>
+        <span data-i18n="tgBtn">Telegram'dan sor</span>
+      </a>
+    </div>
+    <div class="ch-prompts" id="chPrompts" hidden>
+      <span class="muted" data-i18n="tryLabel">Hemen deneyin:</span>
+      <span id="promptChips"></span>
     </div>
   </section>
 
@@ -105,6 +134,6 @@
     Yalnızca demo amaçlıdır. Kamera görüntüsü sahibinin izniyle kullanılmaktadır. Asistan kişileri tanımlamaktan kaçınır ve plaka okumaz.
   </footer>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
