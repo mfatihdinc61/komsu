@@ -1,14 +1,14 @@
 :root {
-  --bg: #14121c;
-  --surface: #1e1b28;
-  --surface-2: #272233;
-  --border: #362f47;
-  --border-soft: #2c2739;
-  --text: #f4ede1;
-  --muted: #a99f93;
-  --accent: #f3c14a;
-  --accent-2: #e0a92e;
-  --ink: #191521;
+  --bg: #0b1220;
+  --surface: #141d2c;
+  --surface-2: #1d2838;
+  --border: #2b3650;
+  --border-soft: #222c40;
+  --text: #e9eef7;
+  --muted: #8a96ac;
+  --accent: #22d3ee;
+  --accent-2: #0ea5c4;
+  --ink: #04222b;
   --wa: #25d366;
   --tg: #29a9eb;
   --live: #ff5a5f;
@@ -24,8 +24,8 @@ body {
   color: var(--text);
   line-height: 1.55;
   background:
-    radial-gradient(1100px 520px at 82% -8%, rgba(243, 193, 74, .12), transparent 60%),
-    radial-gradient(900px 500px at 0% 0%, rgba(224, 130, 60, .10), transparent 55%),
+    radial-gradient(1100px 520px at 82% -8%, rgba(34, 211, 238, .12), transparent 60%),
+    radial-gradient(900px 500px at 0% 0%, rgba(56, 189, 248, .10), transparent 55%),
     var(--bg);
   background-attachment: fixed;
   min-height: 100vh;
@@ -52,7 +52,7 @@ header {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent);
-  box-shadow: 0 0 0 4px rgba(243, 193, 74, .12), 0 8px 20px -8px rgba(0,0,0,.7);
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, .12), 0 8px 20px -8px rgba(0,0,0,.7);
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .wordmark { font-size: 26px; font-weight: 800; letter-spacing: .2px; color: var(--accent); }
@@ -110,7 +110,7 @@ header {
   position: absolute;
   width: 128%; height: 128%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(243, 193, 74, .30), rgba(224, 130, 60, .12) 45%, transparent 68%);
+  background: radial-gradient(circle, rgba(34, 211, 238, .30), rgba(56, 189, 248, .12) 45%, transparent 68%);
   filter: blur(8px);
   z-index: 0;
   animation: glow 6s ease-in-out infinite;
@@ -124,7 +124,7 @@ header {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--accent);
-  box-shadow: 0 0 0 7px rgba(243, 193, 74, .10), 0 28px 60px -22px rgba(0, 0, 0, .9);
+  box-shadow: 0 0 0 7px rgba(34, 211, 238, .10), 0 28px 60px -22px rgba(0, 0, 0, .9);
 }
 .hero-copy { flex: 1 1 360px; max-width: 500px; text-align: left; }
 .hero-copy h1 {
@@ -141,7 +141,7 @@ header {
 }
 .accent {
   color: var(--accent);
-  background: linear-gradient(180deg, transparent 62%, rgba(243,193,74,.22) 62%);
+  background: linear-gradient(180deg, transparent 62%, rgba(34, 211, 238,.22) 62%);
   padding: 0 2px;
 }
 
@@ -177,7 +177,7 @@ header {
 .tab.active {
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
   color: var(--ink);
-  box-shadow: 0 6px 16px -6px rgba(243, 193, 74, .6);
+  box-shadow: 0 6px 16px -6px rgba(34, 211, 238, .6);
 }
 
 main { max-width: 1040px; margin: 20px auto 0; padding: 0 22px; width: 100%; }
@@ -255,7 +255,7 @@ main { max-width: 1040px; margin: 20px auto 0; padding: 0 22px; width: 100%; }
   font-size: 15px;
 }
 .chat-form input::placeholder { color: var(--muted); }
-.chat-form input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(243,193,74,.15); }
+.chat-form input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(34, 211, 238,.15); }
 .chat-form button {
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
   color: var(--ink);
@@ -302,7 +302,7 @@ main { max-width: 1040px; margin: 20px auto 0; padding: 0 22px; width: 100%; }
   border: 1px solid var(--border);
   border-radius: 22px;
   background:
-    radial-gradient(600px 300px at 50% -30%, rgba(243, 193, 74, .18), transparent 70%),
+    radial-gradient(600px 300px at 50% -30%, rgba(34, 211, 238, .18), transparent 70%),
     linear-gradient(160deg, #241d33, #191521);
   box-shadow: var(--shadow);
 }
@@ -316,7 +316,7 @@ main { max-width: 1040px; margin: 20px auto 0; padding: 0 22px; width: 100%; }
   padding: 14px 28px;
   border-radius: 12px;
   font-weight: 700;
-  box-shadow: 0 12px 26px -10px rgba(243, 193, 74, .55);
+  box-shadow: 0 12px 26px -10px rgba(34, 211, 238, .55);
   transition: transform .15s ease, filter .15s ease;
 }
 .cta-btn:hover { filter: brightness(1.06); transform: translateY(-2px); }
@@ -363,8 +363,8 @@ footer strong { color: var(--accent); }
 .shade {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(60vmax 42vmax at 80% -8%, rgba(243, 193, 74, .10), transparent 60%),
-    linear-gradient(180deg, rgba(20, 18, 28, .82) 0%, rgba(20, 18, 28, .90) 45%, rgba(20, 18, 28, .96) 100%);
+    radial-gradient(60vmax 42vmax at 80% -8%, rgba(34, 211, 238, .10), transparent 60%),
+    linear-gradient(180deg, rgba(8, 13, 24, .82) 0%, rgba(8, 13, 24, .90) 45%, rgba(8, 13, 24, .96) 100%);
 }
 
 /* ---------- Argus eye mark (header + hero), overrides the old image logo ---------- */
@@ -379,7 +379,7 @@ footer strong { color: var(--accent); }
   z-index: 1;
   width: clamp(150px, 22vw, 230px);
   height: clamp(150px, 22vw, 230px);
-  filter: drop-shadow(0 12px 34px rgba(243, 193, 74, .28));
+  filter: drop-shadow(0 12px 34px rgba(34, 211, 238, .28));
 }
 
 @media (max-width: 560px) {
