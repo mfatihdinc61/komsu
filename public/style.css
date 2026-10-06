@@ -1,13 +1,13 @@
 :root {
-  --bg: #0b1220;
-  --surface: #141d2c;
-  --surface-2: #1d2838;
-  --border: #2b3650;
-  --border-soft: #222c40;
-  --text: #e9eef7;
-  --muted: #8a96ac;
-  --accent: #22d3ee;
-  --accent-2: #0ea5c4;
+  --bg: #070b13;
+  --surface: #0e151f;
+  --surface-2: #151d2a;
+  --border: #232f43;
+  --border-soft: #1a2433;
+  --text: #e6ecf5;
+  --muted: #7b8798;
+  --accent: #1fc3de;
+  --accent-2: #0a7d94;
   --ink: #04222b;
   --wa: #25d366;
   --tg: #29a9eb;
@@ -356,15 +356,15 @@ footer strong { color: var(--accent); }
 /* Blur + dim so it reads as abstract premium motion (not recognizable imagery). */
 .bg video {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  filter: blur(3px) brightness(.62) saturate(1.05);
+  filter: blur(3px) brightness(.5) saturate(.72);
   transform: scale(1.08);
 }
 /* Dark, amber-tinted overlay so the motion stays subtle and all text is readable. */
 .shade {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(60vmax 42vmax at 80% -8%, rgba(34, 211, 238, .10), transparent 60%),
-    linear-gradient(180deg, rgba(8, 13, 24, .82) 0%, rgba(8, 13, 24, .90) 45%, rgba(8, 13, 24, .96) 100%);
+    radial-gradient(60vmax 42vmax at 80% -8%, rgba(34, 211, 238, .08), transparent 60%),
+    linear-gradient(180deg, rgba(5, 9, 17, .86) 0%, rgba(5, 9, 17, .93) 45%, rgba(5, 9, 17, .98) 100%);
 }
 
 /* ---------- Argus eye mark (header + hero), overrides the old image logo ---------- */
